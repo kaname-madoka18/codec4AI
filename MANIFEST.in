@@ -1,0 +1,13 @@
+include LICENSE NOTICE README.md pyproject.toml setup.py
+recursive-include licenses *
+recursive-include src *.py *.cpp
+recursive-include tools *.py *.sh *.json *.txt *.patch
+recursive-include docs *.md
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include analysis *.py *.md
+recursive-include benchmarks *.py *.sh *.md
+global-exclude *.so *.pyc *.o
+prune releases
+prune build
+prune dist

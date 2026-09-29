@@ -1,0 +1,30 @@
+[build-system]
+requires = [
+  "setuptools>=77",
+  "wheel",
+  "pybind11>=2.10",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-loader"
+version = "0.3.0"
+description = "Dependency-aware MP4 frame extraction and H.264/H.265 transcoding"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.23"]
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE", "NOTICE", "licenses/*"]
+authors = [{name = "Turing VLA"}]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: C++",
+  "Operating System :: POSIX :: Linux",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

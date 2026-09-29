@@ -1,0 +1,23 @@
+codec4AI packages video-loader 0.3.0.
+Original package author: Turing VLA.
+The project source and FFmpeg reference-graph modifications are distributed
+under GPL-3.0-or-later. See LICENSE.
+
+Bundled binary wheels include modified FFmpeg, x264, x265 and libaom.
+Their original notices and terms are retained in licenses/ and in the
+corresponding upstream source archives shipped alongside each release.
+pybind11 headers are used to compile the Python extension (BSD-3-Clause).
+NumPy is a separately installed runtime dependency; it is not vendored.
+
+FFmpeg modifications: tools/patches/ffmpeg-8.1.2-reference-graph.patch adds
+private H.264/HEVC reference-graph callbacks and state-only decoding.
+The release build adds change notices to the modified files (2026-09-29).
+Upstream encoder sources are used without the private b31 modifications.
+
+This software is based in part on the work of the Independent JPEG Group
+(FFmpeg's upstream attribution; see FFmpeg LICENSE.md in the source archive).
+
+The exact source inputs, hashes and reconstruction instructions are in
+tools/sources.json, tools/build_native_deps.py and docs/BUILDING.md.
+Distribute the corresponding-sources archive and source distribution with
+the wheel. See docs/RELEASING.md for release contents.

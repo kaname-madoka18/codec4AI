@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "name": "nasm",
+      "version": "2.16.03",
+      "url": "https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz",
+      "filename": "nasm-2.16.03.tar.xz",
+      "sha256": "1412a1c760bbd05db026b6c0d1657affd6631cd0a63cddb6f73cc6d4aa616148",
+      "license": "BSD-2-Clause"
+    },
+    {
+      "name": "x264",
+      "version": "0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee",
+      "url": "https://code.videolan.org/videolan/x264/-/archive/0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee/x264-0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee.tar.gz",
+      "filename": "x264-0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee.tar.gz",
+      "sha256": "d0967a1348c85dfde363bb52610403be898171493100561efa0dd05d5fd1ae50",
+      "license": "GPL-2.0-or-later"
+    },
+    {
+      "name": "x265",
+      "version": "3.5",
+      "url": "https://download.videolan.org/pub/videolan/x265/x265_3.5.tar.gz",
+      "filename": "x265_3.5.tar.gz",
+      "sha256": "e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8",
+      "license": "GPL-2.0-or-later"
+    },
+    {
+      "name": "aom",
+      "version": "3.14.1",
+      "repository": "https://aomedia.googlesource.com/aom",
+      "commit": "03087864cf4bea6abb0d28f95cf7843511413d8f",
+      "filename": "aom-3.14.1.tar.gz",
+      "sha256": "8654f5bcc66b95fb6a0b18f0cefdd60237f869382f61e2eec6a0d265e2459f07",
+      "license": "BSD-2-Clause AND LicenseRef-AOM-Patent-License"
+    },
+    {
+      "name": "ffmpeg",
+      "version": "8.1.2",
+      "url": "https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz",
+      "filename": "ffmpeg-8.1.2.tar.xz",
+      "sha256": "464beb5e7bf0c311e68b45ae2f04e9cc2af88851abb4082231742a74d97b524c",
+      "license": "GPL-3.0-or-later (configured with --enable-gpl --enable-version3)"
+    }
+  ]
+}
