@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="270" viewBox="0 0 1200 270" role="img" aria-labelledby="title desc">
+  <title id="title">codec4AI</title>
+  <desc id="desc">A translucent pearl-glass wordmark with soft lilac and mint light, rounded edges, and floating video frames.</desc>
+  <defs>
+    <radialGradient id="lilac"><stop stop-color="#bcb0fb" stop-opacity=".36"/><stop offset="1" stop-color="#ded5ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="mint"><stop stop-color="#b2e8b6" stop-opacity=".34"/><stop offset="1" stop-color="#d3f2e4" stop-opacity="0"/></radialGradient>
+    <radialGradient id="blue"><stop stop-color="#b3d9fb" stop-opacity=".2"/><stop offset="1" stop-color="#d8e6ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#fff" stop-opacity=".2"/><stop offset=".48" stop-color="#fff" stop-opacity=".015"/><stop offset="1" stop-color="#f6f9ff" stop-opacity=".1"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".4" stop-color="#d8def0" stop-opacity=".7"/><stop offset=".65" stop-color="#fff"/><stop offset="1" stop-color="#c6dcd8" stop-opacity=".72"/></linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#65718a"/><stop offset=".48" stop-color="#3c4763"/><stop offset="1" stop-color="#626880"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#88b957"/><stop offset="1" stop-color="#4f9253"/></linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a99aec"/><stop offset="1" stop-color="#7561b8"/></linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".48"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-70%" width="160%" height="260%"><feGaussianBlur stdDeviation="8"/></filter>
+    <clipPath id="bounds"><rect x="12" y="8" width="1176" height="250" rx="50"/></clipPath>
+  </defs>
+  <rect x="35" y="28" width="1130" height="221" rx="45" fill="#8898b5" opacity=".055" filter="url(#shadow)"/>
+  <g clip-path="url(#bounds)">
+    <rect x="12" y="8" width="1176" height="250" fill="#f8faff" fill-opacity=".025"/>
+    <ellipse cx="300" cy="192" rx="460" ry="260" fill="url(#lilac)"/>
+    <ellipse cx="959" cy="65" rx="390" ry="237" fill="url(#mint)"/>
+    <ellipse cx="738" cy="288" rx="460" ry="234" fill="url(#blue)"/>
+    <path d="M-30 202C230 36 290 244 551 126S1000 196 1270 3" fill="none" stroke="#fff" stroke-width="18" opacity=".12"/>
+    <rect x="13" y="9" width="1174" height="248" rx="49" fill="url(#face)" stroke="url(#rim)" stroke-width="2"/>
+    <path d="M64 13H1136C1162 13 1183 33 1183 61" fill="none" stroke="#fff" stroke-width="2" opacity=".96"/>
+    <path d="M18 203V63Q18 16 65 16" fill="none" stroke="#fff" stroke-width="2.5" opacity=".85"/>
+    <path d="M36 219Q46 253 89 253H1110Q1150 253 1171 231" fill="none" stroke="#cad2e7" stroke-width="1.1" opacity=".75"/>
+  </g>
+  <text x="600" y="166" text-anchor="middle" fill="#fff" stroke="#fff" stroke-width="2" stroke-opacity=".6" font-family="Segoe UI,Arial,sans-serif" font-size="118" font-weight="800" letter-spacing="-6">codec4AI</text>
+  <text x="600" y="163" text-anchor="middle" fill="url(#ink)" font-family="Segoe UI,Arial,sans-serif" font-size="118" font-weight="800" letter-spacing="-6">codec<tspan fill="url(#green)">4</tspan><tspan fill="url(#purple)">AI</tspan></text>
+  <g transform="translate(399 206)" stroke-width="1.3">
+    <path d="M16 10H386" fill="none" stroke="#a9aac7" opacity=".55"/>
+    <rect width="34" height="21" rx="6" fill="#b4a5e4" stroke="#f6f1ff"/>
+    <rect x="61" width="34" height="21" rx="6" fill="url(#tile)" stroke="#d9ddec"/>
+    <rect x="123" width="34" height="21" rx="6" fill="url(#tile)" stroke="#d9ddec"/>
+    <rect x="184" width="34" height="21" rx="6" fill="#acd397" stroke="#f5ffef"/>
+    <rect x="246" width="34" height="21" rx="6" fill="url(#tile)" stroke="#d9ddec"/>
+    <rect x="307" width="34" height="21" rx="6" fill="url(#tile)" stroke="#d9ddec"/>
+    <rect x="369" width="34" height="21" rx="6" fill="#b4a5e4" stroke="#f6f1ff"/>
+  </g>
+</svg>
