@@ -1,5 +1,7 @@
 # video-loader
 
+English | [Chinese](API_cn.md)
+
 Linux CPU package for extracting selected display frames from H.264, HEVC and
 AV1 MP4 files and for encoding RGB NumPy videos with libx264 or libx265.
 

@@ -12,6 +12,7 @@ wheels/
 outputs/
 releases/*
 !releases/README.md
+!releases/README_cn.md
 .build/
 *.log
 .env

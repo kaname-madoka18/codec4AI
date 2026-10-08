@@ -22,7 +22,7 @@ source_copy="$(mktemp -d "${build_root}/package-source-XXXXXX")"
 from pathlib import Path
 import shutil, sys
 root, dest = map(Path, sys.argv[1:])
-for name in ('README.md', 'LICENSE', 'NOTICE', 'MANIFEST.in', 'pyproject.toml', 'setup.py'):
+for name in ('README.md', 'README_cn.md', 'LICENSE', 'NOTICE', 'MANIFEST.in', 'pyproject.toml', 'setup.py'):
     shutil.copy2(root / name, dest / name)
 for name in ('src', 'tests', 'tools', 'docs', 'licenses', 'examples', 'analysis', 'benchmarks'):
     shutil.copytree(root / name, dest / name,

@@ -1,5 +1,7 @@
 # codec4AI / video-loader 0.3.0
 
+English | [Chinese](RELEASE_NOTES_cn.md)
+
 This release prepares the existing 0.3.0 API as an independent GPL-3.0-or-later
 source repository. Distribution name `video-loader` and import name
 `video_loader` are retained.
@@ -36,8 +38,9 @@ validated targets.
 - `auditwheel repair/show` and `twine check` passed. Six codec shared libraries
   are bundled; libaom is statically linked into libavcodec.
 
-The GitHub workflow has been prepared but has not been run on a hosted runner.
-Other CPython ABIs and platforms have not been validated in this release.
+At the time of this local validation, the GitHub workflow had been prepared but
+had not been run on a hosted runner. Other CPython ABIs and platforms had not been
+validated in this release.
 
 Publish the wheel together with its project sdist and corresponding-sources
 archive. This local preparation does not imply a PyPI or GitHub upload.
@@ -45,11 +48,11 @@ archive. This local preparation does not imply a PyPI or GitHub upload.
 ## Research scripts in the current source tree
 
 The current checkout additionally contains minimally adapted original scripts in
-`benchmarks/`. PyAV now seeks to the preceding keyframe of each requested intra
-period and decodes forward, skipping unused intervening periods. The original
+[`benchmarks/`](../benchmarks/). PyAV now seeks to the preceding keyframe of each
+requested intra period and decodes forward, skipping unused intervening periods. The original
 data formats and experiment settings, including GOP32/B31 preprocessing, remain.
 Only source logic and syntax were reviewed for this migration; execution in the
-current environment is not verified. See [the script notes](../benchmarks/README.md).
+current environment is not verified.
 
 The existing `releases/0.3.0` files are the earlier frozen snapshot and retain
 their hashes. These additional scripts are included in future source builds;

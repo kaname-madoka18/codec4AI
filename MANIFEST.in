@@ -1,4 +1,4 @@
-include LICENSE NOTICE README.md pyproject.toml setup.py
+include LICENSE NOTICE README.md README_cn.md pyproject.toml setup.py
 recursive-include licenses *
 recursive-include src *.py *.cpp
 recursive-include tools *.py *.sh *.json *.txt *.patch

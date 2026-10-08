@@ -1,5 +1,7 @@
 # Analytic reconstruction counts
 
+English | [Chinese](README_cn.md)
+
 These standalone scripts model sequential decoding, hierarchical reference
 closures, DDRA and a fixed I/P GOP=2 baseline. They use the Python standard
 library and do not need a video dataset, a wheel, or cloud credentials.

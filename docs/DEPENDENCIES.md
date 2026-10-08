@@ -1,54 +1,71 @@
-# 外部依赖与许可
+# Dependencies and licensing
 
-## 安装和运行
+English | [Chinese](DEPENDENCIES_cn.md)
 
-| 层级 | 依赖 | 是否包含在 bundled wheel 中 |
+## Installation and runtime
+
+| Layer | Dependency | Included in the bundled wheel? |
 | --- | --- | --- |
-| Python | Python ≥3.10；wheel ABI 必须匹配 | 否 |
-| Python 包 | `numpy>=1.23` | 否，pip 安装 |
-| 视频容器/解码 | FFmpeg 8.1.2：avformat、avcodec、avutil、swscale | 是 |
-| H.264 / HEVC 编码 | x264 / x265 | 是 |
-| AV1 解码 | libaom 3.14.1 | 静态链接进 avcodec，不是独立 `.so` |
-| 系统 ABI | glibc、libstdc++、libgcc 等 manylinux 允许的系统库 | 否，操作系统提供 |
+| Python | Python ≥3.10; the wheel ABI must match | No |
+| Python packages | `numpy>=1.23` | No; installed by pip |
+| Video containers and decoding | FFmpeg 8.1.2: avformat, avcodec, avutil, swscale | Yes |
+| H.264 / HEVC encoding | x264 / x265 | Yes |
+| AV1 decoding | libaom 3.14.1 | Statically linked into avcodec, not a separate `.so` |
+| System ABI | System libraries permitted by manylinux, including glibc, libstdc++, and libgcc | No; provided by the operating system |
 
-因此“无需安装系统 FFmpeg”成立，但“没有外部依赖”不成立。
-安装后的公开 API 不需要 `ffmpeg` CLI、CUDA、PyTorch、Decord、Lance、OSS SDK 或集群平台。
-FFmpeg 网络协议在 bundled 构建中禁用；输入应为本地路径或内存 MP4。
+The wheel does not require a system FFmpeg installation, but it still has external
+dependencies. The installed public API does not require the `ffmpeg` CLI, CUDA,
+PyTorch, Decord, Lance, the OSS SDK, or a cluster platform. FFmpeg network protocols
+are disabled in the bundled build; inputs must be local paths or in-memory MP4
+payloads.
 
-`Video` 当前每次调用都会重建索引，不提供持久解码缓存。AV1 仍读取和解码完整包集合；
-H.264/HEVC 的参考图和 state-only 路径依赖随仓库公开的 FFmpeg 补丁。
+`Video` currently rebuilds the index on each call and does not provide a persistent
+decode cache. AV1 still reads and decodes the complete packet set. The H.264/HEVC
+reference-graph and state-only paths depend on the FFmpeg patch published in this
+repository.
 
-## 构建与测试
+## Building and testing
 
-构建：C/C++17 工具链、make、CMake、Git、Perl、patch、tar/xz、pkg-config、NASM，
-以及 setuptools、wheel、pybind11、build、auditwheel、patchelf、twine。
-直接 Python 构建工具版本见 `tools/build-requirements.txt`；原生源码完整锁定见
-`tools/sources.json`。构建需要访问这些公开上游，或提供包含相同源码的缓存。
+Build requirements: a C/C++17 toolchain, make, CMake, Git, Perl, patch, tar/xz,
+pkg-config, NASM, setuptools, wheel, pybind11, build, auditwheel, patchelf, and
+twine. Direct Python build-tool versions are listed in
+`tools/build-requirements.txt`; pinned native sources are recorded in
+`tools/sources.json`. Building requires access to these public upstream sources
+or a cache containing the same sources.
 
-测试：pytest、NumPy，以及包含 H.264/HEVC/AV1 支持的完整 FFmpeg/ffprobe CLI。
-理论测试只依赖 Python 标准库。测试自动生成小型视频，不需要研究数据或云凭据。
+Test requirements: pytest, NumPy, and a full FFmpeg/ffprobe CLI with
+H.264/HEVC/AV1 support. The analytic tests use only the Python standard library.
+Tests generate small videos automatically and do not require research datasets
+or cloud credentials.
 
-`benchmarks/` 保留原研究脚本，另依赖 Torch、所选解码器、OSS、Lance/Arrow、Pillow、
-冻结数据及相应 FFmpeg 工具链；节点实验还需 Squid/proxychains。它们不属于核心 wheel
-的强制依赖。本轮只核查源码逻辑，没有验证当前环境可运行，详见[脚本说明](../benchmarks/README.md)。
+The original research scripts in `benchmarks/` additionally depend on Torch, the
+selected decoders, OSS, Lance/Arrow, Pillow, frozen datasets, and the corresponding
+FFmpeg toolchain. Node experiments also require Squid/proxychains. These are not
+mandatory dependencies of the core wheel. Only source logic has been reviewed;
+execution in the current environment has not been verified. The scripts are in
+[`benchmarks/`](../benchmarks/).
 
-普通源码构建使用系统开发库时，运行期会依赖那些系统库；只有经过 `auditwheel repair`
-并完成隔离验证的 wheel 才具有这里描述的库打包行为。
+A regular source build using system development libraries depends on those
+libraries at runtime. Only wheels processed by `auditwheel repair` and verified
+in isolation provide the library bundling described here.
 
-## 许可
+## Licensing
 
-| 组件 | 许可 / 本发行使用方式 |
+| Component | License / use in this release |
 | --- | --- |
-| 本项目及 FFmpeg 补丁 | GPL-3.0-or-later |
-| FFmpeg | 上游含 LGPL/GPL；本构建 `--enable-gpl --enable-version3`，采用 GPLv3+ |
-| x264 / x265 | GPL-2.0-or-later；与 GPLv3+ 发行方案组合 |
-| libaom | BSD 类许可及 AOM 专利许可；见 `licenses/aom-*` |
-| pybind11 | BSD-3-Clause；头文件模板编译进扩展 |
-| NASM | BSD-2-Clause；构建工具，不随 wheel 提供可执行文件 |
-| NumPy | BSD-3-Clause；外部 Python 依赖 |
+| This project and its FFmpeg patch | GPL-3.0-or-later |
+| FFmpeg | Upstream includes LGPL/GPL code; this build uses `--enable-gpl --enable-version3` and is GPLv3+ |
+| x264 / x265 | GPL-2.0-or-later; combined with the GPLv3+ distribution |
+| libaom | BSD-style license and AOM patent license; see `licenses/aom-*` |
+| pybind11 | BSD-3-Clause; header templates are compiled into the extension |
+| NASM | BSD-2-Clause; build tool, with no executable bundled in the wheel |
+| NumPy | BSD-3-Clause; external Python dependency |
 
-`licenses/` 保留第三方原文，`NOTICE` 标明 FFmpeg 修改。对应源码归档包含准确上游源码，
-以及生成修改版的补丁和脚本。代码许可证不替代视频标准可能涉及的专利许可，
-也不赋予外部数据集或图片的再分发权。
-[FFmpeg 官方许可说明](https://ffmpeg.org/legal.html)说明了其 GPL 组件和专利问题；
-各组件具体条款以随附的上游源码和原始许可证为准。
+`licenses/` preserves the original third-party license texts, and `NOTICE`
+identifies the FFmpeg modifications. The corresponding-sources archive contains
+the exact upstream sources and the patches and scripts used to produce the
+modified version. Code licenses do not replace patent licenses that video
+standards may require, or grant redistribution rights for external datasets or
+images. The [FFmpeg licensing documentation](https://ffmpeg.org/legal.html)
+discusses its GPL components and patent issues. The supplied upstream sources
+and original licenses define the specific terms for each component.

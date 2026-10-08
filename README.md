@@ -1,5 +1,7 @@
 # codec4AI
 
+English | [Chinese](README_cn.md)
+
 Dependency-aware video loading for AI training. The Python distribution remains
 **video-loader**, imported as **video_loader**. This repository packages version
 **0.3.0** with public build inputs and GPL-3.0-or-later licensing.
@@ -59,12 +61,12 @@ See the [API reference](docs/API.md) for metrics and limitations.
 
 ## Build, test and release
 
-- [构建教程 / Building](docs/BUILDING.md): source builds and self-contained wheels.
-- [发布教程 / Releasing](docs/RELEASING.md): validate and publish a complete release.
-- [依赖与许可 / Dependencies](docs/DEPENDENCIES.md): runtime, build and test dependencies.
+- [Building](docs/BUILDING.md): source builds and self-contained wheels.
+- [Releasing](docs/RELEASING.md): validate and publish a complete release.
+- [Dependencies and licensing](docs/DEPENDENCIES.md): runtime, build and test dependencies.
 - [Release notes](docs/RELEASE_NOTES.md): supported artifacts and validation evidence.
 - [Analytic tests](analysis/README.md): independent, dataset-free graph checks.
-- [Research benchmark scripts](benchmarks/README.md): minimally adapted original experiments, with their data and environment requirements.
+- [Research benchmark scripts](benchmarks/): minimally adapted original experiments; see the [dependency guide](docs/DEPENDENCIES.md) for additional requirements.
 
 ```bash
 python -m pip install -r tools/build-requirements.txt

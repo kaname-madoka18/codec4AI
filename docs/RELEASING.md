@@ -1,11 +1,16 @@
-# 发布教程
+# Release guide
 
-版本：**0.3.0**。仓库名 codec4AI，分发包名 `video-loader`，导入名 `video_loader`。
-本目录生成本地发行候选产物；不会自动向 PyPI 或 GitHub 发布。
+English | [Chinese](RELEASING_cn.md)
 
-## 1. 构建和检查
+Version: **0.3.0**. The repository is named codec4AI, the distribution is
+`video-loader`, and the import name is `video_loader`. This directory produces
+local release candidates; it does not automatically publish them to PyPI or
+GitHub.
 
-按 [构建教程](BUILDING.md) 准备环境后，在仓库根目录执行：
+## 1. Build and check
+
+Prepare the environment using the [build guide](BUILDING.md), then run these
+commands at the repository root:
 
 ```bash
 PYTHON=python BUILD_JOBS=4 bash tools/build_release.sh
@@ -15,27 +20,30 @@ cd releases/0.3.0
 sha256sum --check SHA256SUMS
 ```
 
-每个正式发行版至少附带：
+Each official release should include at least these files:
 
-| 文件 | 作用 |
+| File | Purpose |
 | --- | --- |
-| `video_loader-0.3.0-<ABI>-<platform>.whl` | 对应平台的可安装包 |
-| `video_loader-0.3.0.tar.gz` | 项目 sdist，含 C++、FFmpeg 补丁、构建脚本、测试和文档 |
-| `video_loader-0.3.0-corresponding-sources.tar.gz` | 编解码库的确切源码、项目 sdist、pybind11 和许可 |
-| `build-manifest.json` | 编译器、工具版本、上游版本/校验值、打包库和 wheel 标签 |
-| `SHA256SUMS` | 所有产物的校验和 |
+| `video_loader-0.3.0-<ABI>-<platform>.whl` | Installable package for the corresponding platform |
+| `video_loader-0.3.0.tar.gz` | Project sdist, including C++ sources, the FFmpeg patch, build scripts, tests, and documentation |
+| `video_loader-0.3.0-corresponding-sources.tar.gz` | Exact codec-library sources, project sdist, pybind11, and licenses |
+| `build-manifest.json` | Compiler and tool versions, upstream versions and checksums, bundled libraries, and wheel tags |
+| `SHA256SUMS` | Checksums for all artifacts |
 
-FFmpeg 启用了 x264/x265 和 GPL 组件，不能只上传 wheel 并删除对应源码归档。
-参见 [FFmpeg 许可说明](https://ffmpeg.org/legal.html)及归档中的原始许可。
-源文件中的权利归属仍由原作者保留；本仓库以已选定的 GPL-3.0-or-later 发行。
+FFmpeg is built with x264/x265 and GPL components. Do not upload only the wheel
+and remove the corresponding-sources archive. See the
+[FFmpeg licensing documentation](https://ffmpeg.org/legal.html) and the original
+licenses in the archive. The original authors retain ownership of their source
+files; this repository is distributed under the selected GPL-3.0-or-later license.
 
 ## 2. GitHub Release
 
-创建由你控制的空仓库，将本目录内容提交到仓库根目录。二进制产物不提交到 Git；
-使用仓库 Release 附件承载。确认目标仓库后可使用以下模板：
+Create an empty repository you control and commit this directory's contents at
+its root. Attach binary artifacts to a repository Release instead of committing
+them to Git. After confirming the target repository, use this template:
 
 ```bash
-# 将 OWNER/codec4AI 替换为实际仓库；在仓库根目录执行。
+# Replace OWNER/codec4AI with the actual repository; run at the repository root.
 gh release create v0.3.0 \
   --repo OWNER/codec4AI \
   --title 'codec4AI / video-loader 0.3.0' \
@@ -47,40 +55,51 @@ gh release create v0.3.0 \
   releases/0.3.0/SHA256SUMS
 ```
 
-GitHub 自动生成的仓库源码 ZIP 不包含下载的第三方源码，不能替代上表中的完整归档。
-发布说明中标出对应源码附件和当前已验证的 Python/glibc/架构范围。
+GitHub's automatically generated source ZIP does not include downloaded
+third-party sources and cannot replace the complete archive listed above.
+Identify the corresponding-sources attachment and the validated Python, glibc,
+and architecture combinations in the release notes.
 
 ## 3. TestPyPI / PyPI
 
-先确认你对目标 PyPI 项目名称有发布权限；此工作尚未验证名称归属，也没有上传。
-如果 `video-loader` 名称不可用，需要先确定新的分发名称，不能冒用已有项目。
-导入名与分发名可以分别决定。
+First confirm that you have permission to publish under the target PyPI project
+name. Ownership of the name has not been verified as part of this work, and no
+upload has been performed. If `video-loader` is unavailable, choose a new
+distribution name rather than using an existing project's identity. The import
+name and distribution name can be chosen independently.
 
 ```bash
-# 仅上传 Python 分发产物，不把 corresponding-sources 当作 sdist 上传。
+# Upload only Python distributions, not the corresponding-sources archive as an sdist.
 python -m twine upload --repository testpypi \
   releases/0.3.0/*.whl releases/0.3.0/video_loader-0.3.0.tar.gz
 ```
 
-先将完整对应源码发布到同版本的公开 Release，并把其真实链接写入项目和发行说明；
-在真正发布 PyPI 前，为 `pyproject.toml` 补上自己仓库的 `[project.urls]`。
-然后执行：
+First publish the complete corresponding sources in a public Release for the
+same version, and add their actual link to the project documentation and release
+notes. Before publishing to PyPI, add your repository's `[project.urls]` to
+`pyproject.toml`. Then run:
 
 ```bash
 python -m twine upload \
   releases/0.3.0/*.whl releases/0.3.0/video_loader-0.3.0.tar.gz
 ```
 
-通过 Twine 交互输入或 CI 的凭据机制提供发布 token，不将其写进源码。
-PyPI 不允许覆盖已发布的同名版本文件；若 0.3.0 已经发布，应更新
-`pyproject.toml` 和 `src/video_loader/__init__.py` 中的版本后重新构建、验证。
-具体索引发布流程见 [PyPA 官方教程](https://packaging.python.org/en/latest/tutorials/packaging-projects/)。
+Provide the publishing token through Twine's interactive prompt or the CI
+credential mechanism, rather than storing it in source files. PyPI does not allow
+published files with the same name and version to be overwritten. If 0.3.0 has
+already been published, update the version in `pyproject.toml` and
+`src/video_loader/__init__.py`, then rebuild and verify. See the
+[PyPA packaging tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
+for the package-index publishing process.
 
 ## 4. CI
 
-`.github/workflows/build.yml` 在代码推送、PR 和手动触发时构建并验证 Python 3.12 wheel，
-上传 Actions artifact 供下载。它不会创建公开 Release，也不会上传 PyPI。
-CI 中 `auditwheel` 得出的 glibc 标签可能与本机构建不同，必须以实际产物为准。
+`.github/workflows/build.yml` builds and verifies a Python 3.12 wheel on pushes,
+pull requests, and manual runs, then uploads an Actions artifact for download.
+It does not create a public Release or upload to PyPI. The glibc tag determined
+by `auditwheel` in CI may differ from a local build; use the actual artifact's tag.
 
-要扩展 Python 版本或 manylinux 平台，请添加对应构建环境并分别执行完整验证。
-不能仅根据源码声明扩大预编译 wheel 的兼容范围。
+To support additional Python versions or manylinux platforms, add the
+corresponding build environments and run the full verification for each. Source
+compatibility declarations alone do not establish broader compatibility for
+prebuilt wheels.
