@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="560" viewBox="0 0 760 560" role="img" aria-labelledby="title desc">
+<title id="title">LeRobot v3 video-loading alternative</title>
+<desc id="desc">H.265 DDRA achieves 1.45 times loading throughput and 58.7 percent less media payload than LeRobot v3 at comparable reconstruction quality.</desc>
+<defs>
+ <radialGradient id="lilac"><stop stop-color="#bca7ed" stop-opacity=".27"/><stop offset="1" stop-color="#e4d9fc" stop-opacity="0"/></radialGradient>
+ <radialGradient id="mint"><stop stop-color="#a9d8bf" stop-opacity=".27"/><stop offset="1" stop-color="#d9f2e1" stop-opacity="0"/></radialGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".5"/><stop offset=".52" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#f0f8ff" stop-opacity=".26"/></linearGradient>
+ <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".3" stop-color="#dbe1ef" stop-opacity=".55"/><stop offset=".72" stop-color="#fff"/><stop offset="1" stop-color="#d7e7df" stop-opacity=".65"/></linearGradient>
+ <linearGradient id="purple" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#aa89d9"/><stop offset="1" stop-color="#6949ab"/></linearGradient>
+ <linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7cb888"/><stop offset="1" stop-color="#377f68"/></linearGradient>
+ <clipPath id="edge"><rect x="12" y="12" width="736" height="536" rx="42"/></clipPath>
+</defs>
+<g clip-path="url(#edge)">
+ <ellipse cx="175" cy="350" rx="400" ry="370" fill="url(#lilac)"/>
+ <ellipse cx="667" cy="126" rx="364" ry="313" fill="url(#mint)"/>
+ <path d="M-20 357C195 122 341 408 790 72" fill="none" stroke="#fff" stroke-width="18" opacity=".25"/>
+ <rect x="13" y="13" width="734" height="534" rx="41" fill="url(#glass)" stroke="url(#rim)" stroke-width="1.5"/>
+ <path d="M54 18H706Q742 18 742 54" fill="none" stroke="#fff" stroke-width="2" opacity=".95"/>
+</g>
+<g font-family="Segoe UI,Microsoft YaHei,Arial,sans-serif">
+ <rect x="48" y="48" width="8" height="8" rx="4" fill="#63a387"/>
+ <text x="68" y="59" font-size="17" font-weight="600" fill="#667287">codec4AI · VIDEO LOADING</text>
+ <text x="48" y="135" font-size="52" font-weight="800" fill="#5d4a92" letter-spacing="-1.2">LeRobot Alternative</text>
+ <text x="48" y="184" font-size="27" font-weight="600" fill="#778394" letter-spacing="-.3">Faster loading. Smaller payload.</text>
+ <path d="M48 217H712" stroke="#d6dcec" stroke-opacity=".6"/>
+ <text x="47" y="332" font-size="92" font-weight="800" letter-spacing="-4" fill="url(#purple)">1.45×</text>
+ <text x="393" y="332" font-size="82" font-weight="800" letter-spacing="-3.4" fill="url(#green)">−58.7%</text>
+ <text x="51" y="366" font-size="16" font-weight="600" fill="#75658e" letter-spacing=".5">LOADING THROUGHPUT</text>
+ <text x="400" y="366" font-size="16" font-weight="600" fill="#5b8172" letter-spacing=".5">MEDIA PAYLOAD</text>
+ <path d="M375 260V375" stroke="#dadfec" stroke-opacity=".7"/>
+ <rect x="48" y="406" width="664" height="1" fill="#d6dcec" opacity=".65"/>
+ <text x="48" y="454" font-size="23" font-weight="650" fill="#576478">vs. LeRobot v3</text>
+ <text x="48" y="491" font-size="17" fill="#7b8597">H.265 DDRA · Quality-aligned comparison</text>
+</g>
+</svg>
