@@ -16,3 +16,6 @@ releases/*
 *.log
 .env
 .pypirc
+
+# Local agent files
+agent/
