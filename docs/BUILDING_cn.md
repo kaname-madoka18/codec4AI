@@ -14,7 +14,7 @@ macOS、ARM 和 musl/Alpine 不在此次验证范围内。
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential cmake pkg-config git patch perl \
-  xz-utils patchelf python3-venv ffmpeg
+  xz-utils python3-venv ffmpeg
 ```
 
 `ffmpeg`/`ffprobe` 用于集成测试，安装后的 wheel 本身不调用它们。
@@ -27,6 +27,10 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r tools/build-requirements.txt
 ```
+
+依赖文件包含 `patchelf==0.19.1.0`；Ubuntu 22.04 的旧版系统包不满足 auditwheel
+要求的 patchelf ≥0.14.5。发行构建脚本会优先使用所选 Python 环境的 scripts 目录，
+并在编译前检查实际命中的 patchelf 版本。
 
 也可使用 Python 3.10/3.11 等重新构建对应 ABI；只有实际验证过的版本才应宣称支持。
 `tools/build-requirements.txt` 固定直接构建工具版本；Python 的间接依赖和系统工具链
@@ -128,5 +132,18 @@ python -m build --sdist --no-isolation
 这会复用经过 SHA256 校验的原生源码；Python 构建工具仍需预装或从 PyPI 获取。
 归档还包括编译扩展所用的 pybind11 源码/头文件和第三方许可。
 
-若网络下载失败可重试；缓存文件校验失败时删除该文件并重新获取，不应修改锁定值来
-绕过校验。构建日志保留失败的编译命令，便于排查。
+HTTP 源码下载最多尝试 3 次，重试间隔为 2 秒和 4 秒。每次下载和缓存命中都必须通过
+锁定的 SHA256 校验。失败响应（如果可用）以及 URL、状态码、内容类型、大小、
+预期/实际哈希等 JSON 诊断信息保存在 `SOURCE_CACHE/diagnostics/`。Git 源码获取
+保持原有行为。持续失败时应检查诊断文件，不要修改锁定哈希；已有缓存文件损坏时，
+删除该归档再重新获取。
+
+GitHub Actions 按 `tools/sources.json` 的哈希缓存校验通过的源码归档；job 失败时，
+上传名为 `codec4ai-download-diagnostics` 的诊断附件。未完成下载和诊断文件不纳入
+源码缓存。构建日志也保留失败的编译命令。
+
+构建工具回归测试只需要 Python 标准库：
+
+```bash
+python -m unittest discover -s tools/tests -p 'test_*.py' -v
+```

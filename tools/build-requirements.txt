@@ -3,6 +3,7 @@ setuptools==84.0.0
 wheel==0.48.0
 pybind11==3.1.0
 auditwheel==6.8.2
+patchelf==0.19.1.0
 twine==7.0.0
 pytest==9.1.1
 numpy>=1.23

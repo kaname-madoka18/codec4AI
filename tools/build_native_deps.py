@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import hashlib
+import http.client
 import json
 import os
 from pathlib import Path
@@ -13,6 +14,8 @@ import shlex
 import shutil
 import subprocess
 import tempfile
+import time
+import urllib.error
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +28,55 @@ def run(command, *, cwd=None, env=None):
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def download_archive(item, partial):
+    """Retry HTTP downloads without ever accepting a different source hash."""
+    attempts = 3
+    for attempt in range(1, attempts + 1):
+        partial.unlink(missing_ok=True)
+        details = {
+            "source": item["name"], "url": item["url"], "attempt": attempt,
+            "expected_sha256": item["sha256"],
+        }
+        try:
+            with urllib.request.urlopen(item["url"], timeout=120) as response:
+                details.update(status=response.status, final_url=response.geturl(),
+                               content_type=response.headers.get("Content-Type"))
+                with partial.open("wb") as output:
+                    shutil.copyfileobj(response, output)
+            if digest(partial) != item["sha256"]:
+                raise ValueError(f"SHA256 mismatch for {item['name']}")
+            return
+        except (OSError, http.client.HTTPException, ValueError) as exc:
+            # HTTPError is also an OSError. Preserve its response body when available.
+            if isinstance(exc, urllib.error.HTTPError):
+                details.update(status=exc.code, final_url=exc.geturl(),
+                               content_type=exc.headers.get("Content-Type"))
+                try:
+                    with exc, partial.open("wb") as output:
+                        shutil.copyfileobj(exc, output)
+                except (OSError, http.client.HTTPException) as body_error:
+                    details["response_read_error"] = str(body_error)
+            details["error"] = str(exc)
+            diagnostics = partial.parent / "diagnostics"
+            diagnostics.mkdir(parents=True, exist_ok=True)
+            basename = f"{item['filename']}.attempt-{attempt}"
+            if partial.exists():
+                details.update(size=partial.stat().st_size, actual_sha256=digest(partial))
+                response_path = diagnostics / f"{basename}.response"
+                partial.replace(response_path)
+                details["response_file"] = response_path.name
+            report = diagnostics / f"{basename}.json"
+            report.write_text(json.dumps(details, indent=2) + "\n")
+            print(f"Download failed ({attempt}/{attempts}): "
+                  f"{json.dumps(details)}; diagnostics: {report}", flush=True)
+            if attempt == attempts:
+                raise RuntimeError(
+                    f"Failed to download {item['name']} after {attempts} attempts; "
+                    f"see {diagnostics}"
+                ) from exc
+            time.sleep(2 ** attempt)
 
 
 def fetch(item, cache):
@@ -60,8 +112,7 @@ def fetch(item, cache):
                         if source.wait():
                             raise RuntimeError("git archive failed")
         else:
-            with urllib.request.urlopen(item["url"], timeout=120) as response, partial.open("wb") as output:
-                shutil.copyfileobj(response, output)
+            download_archive(item, partial)
         if digest(partial) != item["sha256"]:
             raise RuntimeError(f"SHA256 mismatch for {item['name']}")
         partial.replace(archive)

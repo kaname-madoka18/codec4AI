@@ -17,7 +17,7 @@ privileges:
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential cmake pkg-config git patch perl \
-  xz-utils patchelf python3-venv ffmpeg
+  xz-utils python3-venv ffmpeg
 ```
 
 `ffmpeg` and `ffprobe` are used for integration tests; the installed wheel does
@@ -31,6 +31,11 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r tools/build-requirements.txt
 ```
+
+The requirements include `patchelf==0.19.1.0`; Ubuntu 22.04's older system
+package does not meet auditwheel's requirement of patchelf 0.14.5 or newer.
+The release script puts the selected Python environment's scripts directory
+first on PATH and checks the actual patchelf version before compiling.
 
 You can also rebuild for other ABIs, such as Python 3.10 or 3.11. Advertise support
 only for versions that have actually been verified. `tools/build-requirements.txt`
@@ -155,6 +160,21 @@ Python build tools must still be preinstalled or fetched from PyPI. The archive
 also contains the pybind11 sources and headers used to compile the extension,
 along with third-party licenses.
 
-Retry failed network downloads as needed. If a cached file fails checksum
-verification, delete it and fetch it again rather than changing the pinned hash
-to bypass verification. Build logs retain failed compiler commands for debugging.
+HTTP source downloads retry up to three times, waiting 2 and 4 seconds between
+attempts. Every download and cache hit must pass the pinned SHA256 check. Failed
+responses, when available, and JSON metadata (URL, status, content type, size,
+expected/actual hashes) are retained under `SOURCE_CACHE/diagnostics/`. Git source
+fetches retain their existing behavior. If retries still fail, inspect these files
+instead of changing the pinned hash. A corrupt cached archive must be removed and
+downloaded again.
+
+GitHub Actions caches verified source archives using a key derived from
+`tools/sources.json`. On job failure, it uploads download diagnostics as the
+`codec4ai-download-diagnostics` artifact. Partial downloads and diagnostics are
+excluded from the source cache. Build logs retain failed compiler commands.
+
+Build-helper regression tests need only the Python standard library:
+
+```bash
+python -m unittest discover -s tools/tests -p 'test_*.py' -v
+```

@@ -3,6 +3,9 @@ set -euo pipefail
 
 package_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 python="${PYTHON:-python3}"
+python_scripts="$("${python}" -c 'import sysconfig; print(sysconfig.get_path("scripts"))')"
+export PATH="${python_scripts}:${PATH}"
+"${python}" "${package_dir}/tools/check_build_tools.py"
 build_root="${BUILD_ROOT:-$(mktemp -d /tmp/codec4ai-build-XXXXXX)}"
 mkdir -p "${build_root}"
 build_root="$(cd "${build_root}" && pwd)"
@@ -11,7 +14,6 @@ version="$("${python}" -c 'import ast,sys; t=ast.parse(open(sys.argv[1]).read())
 output_dir="${OUTPUT_DIR:-${package_dir}/releases/${version}}"
 mkdir -p "${output_dir}"
 output_dir="$(cd "${output_dir}" && pwd)"
-command -v patchelf >/dev/null || { echo 'patchelf is required' >&2; exit 1; }
 "${python}" -c 'import build, setuptools, pybind11, auditwheel, twine'
 
 "${python}" "${package_dir}/tools/build_native_deps.py" \
