@@ -11,7 +11,10 @@
   <a href="#lerobot-alternative"><img src="https://img.shields.io/badge/%F0%9F%A4%96%20LeRobot%20Loading%20Alternative-4c997e?style=for-the-badge" alt="🤖 LeRobot Loading Alternative" /></a>
 </p>
 
-<p align="center"><a href="#paper"><img src="https://img.shields.io/badge/📘_Paper-Coming_soon-9c9eb5?style=flat-square" alt="Paper · Coming soon" /></a></p>
+<p align="center">
+  <a href="https://arxiv.org/abs/2610.33079"><img src="https://img.shields.io/badge/%F0%9F%93%98%20Paper-arXiv%3A2610.33079-8871c4?style=flat-square" alt="Paper · arXiv:2610.33079" /></a>
+  <a href="https://skywalker-yqz.github.io/codec4AI/"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Project%20Page-codec4AI-4c997e?style=flat-square" alt="Project Page · codec4AI" /></a>
+</p>
 
 <p align="center"><b>English</b> · <a href="README_cn.md">简体中文</a></p>
 
@@ -135,9 +138,19 @@ that archive. FFmpeg is built with GPL components; see [its licensing documentat
 <a id="paper"></a>
 ## 📘 Paper
 
-Paper link coming soon.
+[📘 Paper · arXiv:2610.33079](https://arxiv.org/abs/2610.33079) · [🌐 Project Page](https://skywalker-yqz.github.io/codec4AI/)
 
 <a id="citation"></a>
 ## 📚 Citation
 
-BibTeX coming soon.
+```bibtex
+@misc{song2026rethinkingvideostorageai,
+      title={Rethinking Video Storage for AI Training: Breaking Cross-Frame Dependencies for Efficient Random Access},
+      author={Zetian Song and Qize Yu and Yue Chen and Bohan Zhou and Bowen Ping and Yuqi Ye and Haocheng Tang and Haotian Zhang and Qizhe Wang and Shiyu Huang and Jiaqi Zhang and Siwei Ma and Wen Gao},
+      year={2026},
+      eprint={2610.33079},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2610.33079},
+}
+```
