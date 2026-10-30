@@ -18,7 +18,7 @@
 
 <p align="center"><b>English</b> · <a href="README_cn.md">简体中文</a></p>
 
-<p align="center"><a href="#contributions">Contributions</a> · <a href="#method">Framework</a> · <a href="#quick-start">Quick Start</a> · <a href="#documentation">Documentation</a> · <a href="#citation">Citation</a></p>
+<p align="center"><a href="#contributions">Contributions</a> · <a href="#method">Framework</a> · <a href="#todo">TODO List</a> · <a href="#quick-start">Quick Start</a> · <a href="#documentation">Documentation</a> · <a href="#citation">Citation</a></p>
 
 <a id="lerobot-alternative"></a>
 <p align="center">
@@ -39,6 +39,14 @@ Paper results: H.265 DDRA vs. LeRobot v3 at comparable reconstruction quality, a
 ## 🧩 Framework
 
 <p align="center"><img src="docs/assets/framework.png" width="100%" alt="Training data path and codec-loader co-design" /></p>
+
+<a id="todo"></a>
+## 📝 TODO List
+
+- [x] Implement core H.264 / H.265 codec support, including DDRA encoding and dependency-aware sparse decoding.
+- [x] Provide Python APIs, quick-start examples, and source build tools.
+- [x] Release performance benchmark scripts and documentation in English and Chinese.
+- [ ] Support **on-demand bitstream transfer**, transmitting compressed data for requested frames and their required reference frames as needed.
 
 <a id="quick-start"></a>
 ## 🚀 Quick Start

@@ -18,7 +18,7 @@
 
 <p align="center"><a href="README.md">English</a> · <b>简体中文</b></p>
 
-<p align="center"><a href="#contributions">Contributions</a> · <a href="#method">框架</a> · <a href="#quick-start">快速开始</a> · <a href="#documentation">文档</a> · <a href="#citation">引用</a></p>
+<p align="center"><a href="#contributions">Contributions</a> · <a href="#method">框架</a> · <a href="#todo">开发计划</a> · <a href="#quick-start">快速开始</a> · <a href="#documentation">文档</a> · <a href="#citation">引用</a></p>
 
 <a id="lerobot-alternative"></a>
 <p align="center">
@@ -39,6 +39,14 @@
 ## 🧩 框架
 
 <p align="center"><img src="docs/assets/framework.png" width="100%" alt="Training data path and codec-loader co-design" /></p>
+
+<a id="todo"></a>
+## 📝 开发计划
+
+- [x] 完成核心编解码实现，支持 H.264 / H.265 的 DDRA 编码与依赖感知稀疏解码。
+- [x] 提供 Python API、快速上手示例与源码构建工具。
+- [x] 开放性能基准脚本与中英文使用文档。
+- [ ] 支持 **On-demand 码流传输**，按采样需求传输目标帧及其必要参考帧的压缩数据。
 
 <a id="quick-start"></a>
 ## 🚀 快速开始
